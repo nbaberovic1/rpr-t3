@@ -2,6 +2,9 @@ package ba.unsa.etf.rpr;
 
 import java.util.Objects;
 
+/**
+ * klasa koja predstavlja fiksni broj
+ */
 public class FiksniBroj extends TelefonskiBroj{
     private String fiksniBroj; //String fiksnog broja u formi xxx/xxx-xxx
 
