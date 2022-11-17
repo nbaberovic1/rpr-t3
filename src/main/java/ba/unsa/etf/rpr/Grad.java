@@ -15,6 +15,15 @@ public enum Grad { TRAVNIK("030/"), ORAŠJE("031/"), ZENICA("032/"), SARAJEVO("0
         return pozivniBroj;
     }
 
+    public static Grad izPozivnog(String pozivni){
+        for(Grad grad : Grad.values()){
+            if(grad.getPozivniBroj().equals(pozivni)) {
+                return grad;
+            }
+        }
+        return null;
+    }
+
     //privatni konstuktor koji inicijalizira privatni atribut pozivniBroj
     Grad(String pozivniBroj){
         this.pozivniBroj = pozivniBroj;
