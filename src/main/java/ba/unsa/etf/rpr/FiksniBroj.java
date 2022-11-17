@@ -1,34 +1,14 @@
 package ba.unsa.etf.rpr;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
  * klasa koja predstavlja fiksni broj
  */
 public class FiksniBroj extends TelefonskiBroj{
+    private Grad grad;
     private String fiksniBroj; //String fiksnog broja u formi xxx/xxx-xxx
-
-    /**
-     * enum klasa grad koja sadrzi imena glavnih gradova kantona i regija
-     * i njihove pozivne brojeve fiksne telefonije
-     */
-    public enum Grad { TRAVNIK("030/"), ORAŠJE("031/"), ZENICA("032/"), SARAJEVO("033/"), LIVNO("034/"),
-        TUZLA("035/"), MOSTAR("036/"), BIHAĆ("037/"), GORAŽDE("038/"), ŠIROKI_BRIJEG("039/"),
-        BRČKO("049/"), MRKONJIĆ_GRAD("050/"), BANJA_LUKA("051/"), PRIJEDOR("052/"), DOBOJ("053/"),
-        ŠAMAC("054/"), BIJELJINA("055/"), ZVORNIK("056/"), PALE("057/"), FOČA("058/"), TREBINJE("059/");
-
-        private String pozivniBroj;  //string koji sadrzi pozivni broj u obliku xxx/
-
-        //metoda koja vraća pozivni broj
-        public String getPozivniBroj() {
-            return pozivniBroj;
-        }
-
-        //privatni konstuktor koji inicijalizira privatni atribut pozivniBroj
-        private Grad(String pozivniBroj){
-            this.pozivniBroj = pozivniBroj;
-        }
-    }
 
     /**
      * konstruktor koji kreira objekat FiksniBroj
@@ -37,6 +17,11 @@ public class FiksniBroj extends TelefonskiBroj{
      */
     public FiksniBroj(Grad grad, String broj){
         this.fiksniBroj = grad.getPozivniBroj() + broj;
+        this.grad = grad;
+    }
+
+    public Grad getGrad(){
+        return this.grad;
     }
 
     /**
