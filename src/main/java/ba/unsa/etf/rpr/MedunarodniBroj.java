@@ -6,8 +6,8 @@ import java.util.Objects;
  * klasa koja predstavlja medunarodni broj
  */
 public class MedunarodniBroj extends TelefonskiBroj{
-
-    private String medunarodniBroj; //cuva string medunarodnog broja
+    private String drzava; // cuva string pozivnog broja drzave
+    private String broj; //cuva string broja
 
     /**
      * konstrukor klase MedunarodniBroj
@@ -15,7 +15,9 @@ public class MedunarodniBroj extends TelefonskiBroj{
      * @param broj
      */
     public MedunarodniBroj(String drzava, String broj){
-        this.medunarodniBroj = new StringBuilder().append("(").append(drzava).append(")").append(broj).toString();
+        if(drzava == null || broj == null) throw new BrojException("Pozivni broj drzave ili jedinstveni broj nije OK!");
+        this.drzava = drzava;
+        this.broj = broj;
     }
 
     /**
@@ -23,27 +25,19 @@ public class MedunarodniBroj extends TelefonskiBroj{
      * @return string medunarodnog broja
      */
     public String ispisi() {
-        return medunarodniBroj;
+        return new StringBuilder().append(drzava).append(broj).toString();
     }
 
-    /**
-     * generisana equals metoda
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MedunarodniBroj that = (MedunarodniBroj) o;
-        return Objects.equals(medunarodniBroj, that.medunarodniBroj);
+        return Objects.equals(drzava, that.drzava) && Objects.equals(broj, that.broj);
     }
 
-    /**
-     * generisana hashCode metoda
-     * @return
-     */
+    @Override
     public int hashCode() {
-        return Objects.hash(medunarodniBroj);
+        return Objects.hash(drzava, broj);
     }
 }

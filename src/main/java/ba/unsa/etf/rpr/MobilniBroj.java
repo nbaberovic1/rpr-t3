@@ -7,8 +7,8 @@ import java.util.Objects;
  *
  */
 public class MobilniBroj extends TelefonskiBroj{
-
-    private String mobilniBroj; //cuva mobilni broj u obliku xxx/xxx-xxx
+    private int mobilnaMreza;
+    private String broj; //cuva mobilni broj u obliku xxx/xxx-xxx
 
     /**
      * konstruktor klase MobilniBroj, prima dva parametra
@@ -16,7 +16,9 @@ public class MobilniBroj extends TelefonskiBroj{
      * @param broj - mobilni broj u obliku xxx-xxx
      */
     public MobilniBroj(int mobilnaMreza, String broj){
-        this.mobilniBroj = new StringBuilder().append("0").append(mobilnaMreza).append("/").append(broj).toString();
+        if(broj == null) throw new BrojException("Jedinstveni broj nije OK!");
+        this.mobilnaMreza = mobilnaMreza;
+        this.broj = broj;
     }
 
     /**
@@ -24,28 +26,19 @@ public class MobilniBroj extends TelefonskiBroj{
      * @return string mobilnog broja u obliku xxx/xxx-xxx
      */
     public String ispisi() {
-        return mobilniBroj;
+        return new StringBuilder().append("0").append(mobilnaMreza).append("/").append(broj).toString();
     }
 
-    /**
-     * generisana equals metoda
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MobilniBroj that = (MobilniBroj) o;
-        return Objects.equals(mobilniBroj, that.mobilniBroj);
+        return mobilnaMreza == that.mobilnaMreza && Objects.equals(broj, that.broj);
     }
 
-    /**
-     * generisana hashCode metoda
-     * @return
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(mobilniBroj);
+        return Objects.hash(mobilnaMreza, broj);
     }
 }

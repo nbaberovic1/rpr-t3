@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 public class FiksniBroj extends TelefonskiBroj{
     private Grad grad;
-    private String fiksniBroj; //String fiksnog broja u formi xxx/xxx-xxx
+    private String broj; //String fiksnog broja u formi xxx/xxx-xxx
 
     /**
      * konstruktor koji kreira objekat FiksniBroj
@@ -16,10 +16,15 @@ public class FiksniBroj extends TelefonskiBroj{
      * @param broj - fiksni broj bez pozivnog u obliku xxx-xxx
      */
     public FiksniBroj(Grad grad, String broj){
-        this.fiksniBroj = grad.getPozivniBroj() + broj;
+        if(grad == null || broj == null) throw new BrojException("Broj ili pozivni broj za fiksni telefon nije OK!");
+        this.broj = broj;
         this.grad = grad;
     }
 
+    /**
+     * standardni geter za Grad, odnosno pozivni broj
+     * @return vraća tip Grad
+     */
     public Grad getGrad(){
         return this.grad;
     }
@@ -28,17 +33,21 @@ public class FiksniBroj extends TelefonskiBroj{
      * vraća String fiksnog broja spreman za ispis
      * @return String fiksnog broja u obliku xxx/xxx-xxx
      */
-    public  String ispisi(){
-        return fiksniBroj;
+    public String ispisi(){
+        return grad.getPozivniBroj() + "/" + broj;
     }
 
-    //standardna equals metoda generisana intellij-jem
+    /**
+     * generisana equals metoda
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FiksniBroj that = (FiksniBroj) o;
-        return Objects.equals(fiksniBroj, that.fiksniBroj);
+        return grad == that.grad && Objects.equals(broj, that.broj);
     }
 
     /**
@@ -47,6 +56,16 @@ public class FiksniBroj extends TelefonskiBroj{
      */
     @Override
     public int hashCode() {
-        return Objects.hash(fiksniBroj);
+        return Objects.hash(grad, broj);
     }
+
+    /**
+     * standardni geter za broj
+     * @return vraća broj bez pozivnog broja
+     */
+    public String getBroj() {
+        return broj;
+    }
+
+
 }
