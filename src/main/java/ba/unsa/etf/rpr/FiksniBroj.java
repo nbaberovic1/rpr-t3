@@ -16,7 +16,7 @@ public class FiksniBroj extends TelefonskiBroj{
      * @param broj - fiksni broj bez pozivnog u obliku xxx-xxx
      */
     public FiksniBroj(Grad grad, String broj){
-        if(grad == null || broj == null) throw new BrojException("Broj ili pozivni broj za fiksni telefon nije OK!");
+        if(grad == null || broj == null) throw new BrojException("Jedinstveni broj ili pozivni broj za fiksni telefon nije OK!");
         this.broj = broj;
         this.grad = grad;
     }
