@@ -13,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit test for simple App.
  */
-public class ImenikTest
-{
+public class ImenikTest {
     private static Imenik imenik = new Imenik();
 
     @BeforeAll

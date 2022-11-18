@@ -125,6 +125,9 @@ public class Imenik {
         return builder.toString();
     }
 
+    public void setImenik(Map<String, TelefonskiBroj> imenik) {
+        this.imenik = imenik;
+    }
 }
 
 
