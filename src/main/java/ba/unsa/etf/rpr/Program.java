@@ -55,12 +55,18 @@ public class Program {
     }
 
     private static void dajIme() {
-        TelefonskiBroj broj = unesiBrojTelefona();
-        String ime = imenik.dajIme(broj);
-        if(ime != null){
-            System.out.println("Vlasnik broja " + broj.ispisi() + " je " + ime);
-        }else {
-            System.out.println("Ne postoji u imeniku!");
+        try {
+            TelefonskiBroj broj = unesiBrojTelefona();
+            String ime = imenik.dajIme(broj);
+            if (ime != null) {
+                System.out.println("Vlasnik broja " + broj.ispisi() + " je " + ime);
+            } else {
+                System.out.println("Ne postoji u imeniku!");
+            }
+        }catch(BrojException e){
+            System.out.println(e.getMessage());
+        }catch (Exception e){
+            System.out.println("Uneseni netacni podaci!");
         }
     }
 
@@ -71,6 +77,7 @@ public class Program {
             case "mobilni":
                 System.out.println("Unesite mrežu: ");
                 int mreza = ulaz.nextInt();
+                ulaz.nextLine();
                 System.out.println("Unesite broj: ");
                 String mobBroj = ulaz.nextLine();
                 return new MobilniBroj(mreza, mobBroj);
@@ -81,13 +88,12 @@ public class Program {
                 String fikBroj = ulaz.nextLine();
                 return new FiksniBroj(Grad.izPozivnog(pozivni), fikBroj);
             case "medunarodni":
-                System.out.println("Unesite ime drzave: ");
+                System.out.println("Unesite kod drzave [+387]: ");
                 String drzava = ulaz.nextLine();
                 System.out.println("Unesite broj: ");
                 String medBroj = ulaz.nextLine();
                 return new MedunarodniBroj(drzava, medBroj);
             default:
-                
         }
         return null;
     }
@@ -128,8 +134,14 @@ public class Program {
     private static void dodajBroj() {
         System.out.println("Unesite ime: ");
         String ime = ulaz.nextLine();
-        TelefonskiBroj broj = unesiBrojTelefona();
-        imenik.dodaj(ime, broj);
+        try {
+            TelefonskiBroj broj = unesiBrojTelefona();
+            imenik.dodaj(ime, broj);
+        }catch(BrojException e){
+            System.out.println(e.getMessage());
+        }catch (Exception e){
+            System.out.println("Uneseni netacni podaci!");
+        }
     }
 
     private static void popuniPodatke(){
